@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->enum('gender', ['male', 'female', 'other']);
+            $table->string('email')->unique();
+            $table->date('date_of_birth');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('academic_title')->nullable();
             $table->timestamps();
         });
     }

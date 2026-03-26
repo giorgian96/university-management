@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->enum('type', ['lab', 'exam']);
+            $table->unsignedTinyInteger('attempt');
+            $table->decimal('value', 4, 2);
             $table->timestamps();
+
+            $table->unique(['student_id', 'course_id', 'type', 'attempt']);
         });
     }
 
